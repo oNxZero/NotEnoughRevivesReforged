@@ -8,6 +8,8 @@ Use `build/libs/NotEnoughRevivesReforged-neoforge-1.21.1-1.0.2-rc.5.jar` on both
 - [Complete configuration reference](docs/CONFIGURATION.md)
 - [Build, tests and troubleshooting](docs/BUILDING.md)
 - [Architecture and source map](docs/ARCHITECTURE.md)
+- [Repository and contribution workflow](docs/REPOSITORY.md)
+- [Recorded validation results](docs/VALIDATION.md)
 - [Change history](CHANGELOG.md)
 - [Attribution and distribution status](NOTICE.md)
 
