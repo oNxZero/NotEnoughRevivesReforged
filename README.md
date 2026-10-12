@@ -72,7 +72,7 @@ Third-party damage sources without an owning player and mods with custom interac
 
 ## Public release
 
-The original mod declares **All rights reserved**. Obtain redistribution permission from its author before publishing the combined JAR or reconstructed source, preserve attribution, and agree on fork branding. Modrinth's redistribution rules: https://modrinth.com/legal/rules . This is a private tested release candidate, not an assertion of public-upload permission.
+The original mod declares **All rights reserved**. Obtain redistribution permission from its author before publishing the combined JAR or reconstructed source, preserve attribution, and agree on fork branding. Modrinth's redistribution rules: https://modrinth.com/legal/rules . This repository is public; its visibility does not establish redistribution permission or grant an open-source license.
 
 ### Damage handling fix
 

@@ -2,7 +2,7 @@
 
 GitHub repository: [oNxZero/NotEnoughRevivesReforged](https://github.com/oNxZero/NotEnoughRevivesReforged).
 
-The repository is private. It tracks replacement source, resources, test fixtures, Gradle tooling, default configuration and documentation. The original dependency and generated mod JARs are excluded. See [NOTICE.md](../NOTICE.md) for attribution and distribution status.
+The repository is public. It tracks replacement source, resources, test fixtures, Gradle tooling, default configuration and documentation. The original dependency and generated mod JARs are excluded. See [NOTICE.md](../NOTICE.md) for attribution and distribution status.
 
 ## Getting a working checkout
 
@@ -11,7 +11,7 @@ git clone https://github.com/oNxZero/NotEnoughRevivesReforged.git
 cd NotEnoughRevivesReforged
 ```
 
-Access requires permission to the private repository. Obtain the original base JAR separately, place it at the checkout root, and follow [BUILDING.md](BUILDING.md) for its expected checksum, JDK and build commands.
+Obtain the original base JAR separately, place it at the checkout root, and follow [BUILDING.md](BUILDING.md) for its expected checksum, JDK and build commands.
 
 ## Making changes
 
