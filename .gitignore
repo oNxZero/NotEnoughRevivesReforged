@@ -1,0 +1,17 @@
+# Gradle output and local runtime data
+.gradle/
+build/
+run/
+logs/
+*.log
+*.hprof
+# Locally supplied original mod and generated binaries
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+# IDE and local credentials
+.idea/
+.vscode/
+*.iml
+.env
+.env.*
+.DS_Store

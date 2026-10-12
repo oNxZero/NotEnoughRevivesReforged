@@ -1,0 +1,40 @@
+jar {
+    archiveFileName = 'NotEnoughRevivesReforged-neoforge-1.21.1-1.0.2-rc.5.jar'
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+    manifest { attributes('Implementation-Version': project.version, 'Automatic-Module-Name': 'com.termi.notenoughrevives') }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from(zipTree('not-enough-revives-neoforge-1.21.1-1.0.1.jar')) { original ->
+        exclude 'META-INF/MANIFEST.MF', 'data/not_enough_revives/recipe/cross_of_revival.json'
+        exclude file('gradle/removed-legacy-entries.txt').readLines()
+        exclude 'assets/not_enough_revives/sounds.json'
+        exclude 'not_enough_revives.mixins.json', 'META-INF/neoforge.mods.toml', 'pack.mcmeta'
+        fileTree('src/main/java').matching { include '**/*.java' }.files.each { source ->
+            def relative = file('src/main/java').toPath().relativize(source.toPath()).toString().replace(File.separatorChar, '/' as char)
+            def base = relative.substring(0, relative.length() - 5)
+            original.exclude(base + '.class', base + '$*.class')
+        }
+    }
+}
+
+// Check the actual packaged artifact and resolve common classes with client classes forbidden.
+tasks.register('verifyPatch', JavaExec) {
+    dependsOn jar, testClasses
+    classpath = files(sourceSets.test.runtimeClasspath, configurations.compileClasspath)
+    mainClass = 'PatchVerification'
+    doFirst {
+        args = [file('not-enough-revives-neoforge-1.21.1-1.0.1.jar').absolutePath,
+                tasks.jar.archiveFile.get().asFile.absolutePath,
+                files(tasks.jar.archiveFile, configurations.compileClasspath).asPath,
+                file('src/main/java').absolutePath]
+    }
+}
+tasks.named('check') { dependsOn 'verifyPatch' }
+
+tasks.register('stabilityTests', JavaExec) {
+    dependsOn testClasses
+    classpath = files(sourceSets.test.runtimeClasspath, configurations.compileClasspath)
+    mainClass = 'StabilityRegressionTest'
+    args file('build/stability-tests').absolutePath
+}
+tasks.named('check') { dependsOn 'stabilityTests' }

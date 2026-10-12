@@ -1,0 +1,64 @@
+plugins {
+    id 'java'
+    id 'net.neoforged.moddev' version '2.0.148'
+}
+
+group = 'com.termi'
+version = '1.0.2-rc.5'
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+sourceSets { smoke; gameTests; clientSmoke }
+neoForge {
+    version = '21.1.166'
+    addModdingDependenciesTo sourceSets.smoke
+    addModdingDependenciesTo sourceSets.test
+    addModdingDependenciesTo sourceSets.gameTests
+    addModdingDependenciesTo sourceSets.clientSmoke
+    mods {
+        ner_stability_tests { sourceSet sourceSets.gameTests }
+        ner_client_smoke { sourceSet sourceSets.clientSmoke }
+    }
+    runs {
+        smokeClient {
+            client()
+            sourceSet = sourceSets.clientSmoke
+            loadedMods = [mods.ner_client_smoke]
+            gameDirectory = file('build/smoke-client')
+            programArguments.addAll '--width', '640', '--height', '480'
+        }
+        gameTestServer {
+            type = 'gameTestServer'
+            sourceSet = sourceSets.gameTests
+            loadedMods = [mods.ner_stability_tests]
+            gameDirectory = file('build/game-test-server')
+            systemProperty 'neoforge.enabledGameTestNamespaces', 'ner_stability_tests'
+        }
+        smokeServer {
+            server()
+            sourceSet = sourceSets.smoke
+            loadedMods = []
+            gameDirectory = file('build/smoke-server')
+            programArguments.addAll '--nogui', '--initSettings'
+        }
+    }
+}
+
+dependencies {
+    compileOnly files('not-enough-revives-neoforge-1.21.1-1.0.1.jar')
+    testImplementation files('not-enough-revives-neoforge-1.21.1-1.0.1.jar')
+    gameTestsImplementation files(tasks.named('jar').flatMap { it.archiveFile })
+    clientSmokeImplementation files(tasks.named('jar').flatMap { it.archiveFile })
+    smokeRuntimeOnly files(tasks.named('jar').flatMap { it.archiveFile })
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 21
+    options.encoding = 'UTF-8'
+    options.compilerArgs += ['-proc:none']
+}
+apply from: 'gradle/patch.gradle'
+tasks.named('runSmokeServer') { dependsOn jar }
+
+tasks.named('runGameTestServer') { dependsOn jar }
+
+tasks.named('runSmokeClient') { dependsOn jar }

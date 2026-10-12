@@ -1,0 +1,7 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="All rights reserved"
+[[mods]]
+modId="ner_client_smoke"
+version="1.0.0"
+displayName="NER Client Smoke Test"

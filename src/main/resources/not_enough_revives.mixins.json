@@ -1,0 +1,28 @@
+{
+  "required": true,
+  "package": "com.termi.notenoughrevives.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "LivingEntityAccessor",
+    "ServerPlayerEntityMixin",
+    "FinalPlayerDamageMixin",
+    "NERServerPlayerKnockMixin",
+    "NERDeathMessageMixin",
+    "PlayerEntityMixin",
+    "PlayerEntityMiningMixin",
+    "NERTargetPredicateMixin",
+    "ServerPlayerInteractionManagerMixin",
+    "DownedInteractionMixin",
+    "DownedFinishMixin",
+    "DownedServerInputMixin",
+    "DownedJumpMixin"
+  ],
+  "client": [
+    "ClientPlayerEntityMixin",
+    "EntityGlowColorMixin",
+    "DownedClientInputMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

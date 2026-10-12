@@ -1,0 +1,28 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "All rights reserved"
+
+[[mods]]
+modId = "not_enough_revives"
+version = "1.0.2-rc.5"
+displayName = "Not Enough Revives Reforged"
+description = "Reforged edition of Not Enough Revives with expanded revival features and stability fixes. Original mod by Sir Terminator. Redistribution permission has not been established."
+authors = "Sir Terminator"
+logoFile = "assets/not_enough_revives/icon.png"
+
+[[mixins]]
+config = "not_enough_revives.mixins.json"
+
+[[dependencies.not_enough_revives]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1.166,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.not_enough_revives]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,1.21.2)"
+ordering = "NONE"
+side = "BOTH"
